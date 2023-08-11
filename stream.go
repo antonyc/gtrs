@@ -2,6 +2,7 @@ package gtrs
 
 import (
 	"context"
+	"github.com/go-redis/redis/v7"
 
 	"github.com/redis/go-redis/v9"
 )
@@ -31,6 +32,8 @@ func (s Stream[T]) Add(ctx context.Context, v T, idarg ...string) (string, error
 
 	id, err := s.client.XAdd(ctx, &redis.XAddArgs{
 		Stream: s.stream,
+		MaxLen: 100000,
+		Approx: true,
 		Values: structToMap(v),
 		ID:     id,
 	}).Result()
