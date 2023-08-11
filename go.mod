@@ -1,4 +1,4 @@
-module github.com/dranikpg/gtrs
+module github.com/antonyc/gtrs
 
 go 1.18
 
